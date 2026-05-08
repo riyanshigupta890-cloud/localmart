@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const API = axios.create({ baseURL: "http://localhost:5000/api/admin" });
+const API = axios.create({ baseURL: "https://localmart-m1fl.onrender.com/api/admin" });
 
 const STATUSES = ["Order Placed", "Processing", "Shipped", "Out for Delivery", "Delivered"];
 
