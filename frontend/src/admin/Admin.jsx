@@ -12,7 +12,6 @@ const emptyProduct = {
 };
 
 function Admin({ password, onLogout , onBack }) {
-  const headers = { password };
   const [tab, setTab]               = useState("dashboard");
   const [stats, setStats]           = useState(null);
   const [products, setProducts]     = useState([]);
@@ -26,7 +25,8 @@ function Admin({ password, onLogout , onBack }) {
     setTimeout(() => setToast(null), 2500);
   };
 
-  useEffect(() => {
+ useEffect(() => {
+  const headers = { password };
   if (tab === "dashboard") {
     API.get("/stats", { headers }).then(r => setStats(r.data));
   } else if (tab === "products") {
@@ -37,6 +37,7 @@ function Admin({ password, onLogout , onBack }) {
 }, [tab, password]); // ← add password here instead of headers
 
   const handleSave = async () => {
+    const headers = { password };
     try {
       const data = {
         ...form,
@@ -62,6 +63,7 @@ function Admin({ password, onLogout , onBack }) {
   };
 
   const handleDelete = async (id) => {
+    const headers = { password };
     if (!window.confirm("Delete this product?")) return;
     await API.delete(`/products/${id}`, { headers });
     showToast("🗑️ Product deleted!");
@@ -75,6 +77,7 @@ function Admin({ password, onLogout , onBack }) {
   };
 
   const handleStatusChange = async (orderId, status) => {
+    const headers = { password };
     await API.put(`/orders/${orderId}`, { status }, { headers });
     setOrders(prev => prev.map(o => o._id === orderId ? { ...o, status } : o));
     showToast("✅ Order status updated!");
