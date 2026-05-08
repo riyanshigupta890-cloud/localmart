@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://localmart-m1fl.onrender.com",
+  baseURL: "https://localmart-m1fl.onrender.com/api",
 });
 
 export const getProducts = (params) => API.get("/products", { params });
